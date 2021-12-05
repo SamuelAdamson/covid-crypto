@@ -8,7 +8,7 @@ import operations as op
 # Store table ID
 TABLE_ID = 'csci-260.covid_crypto.covid_deaths'
 # Columns
-COL_DATES = 'date_range'
+COL_DATE = 'date_range'
 COL_COUNT = 'count'
 
 
@@ -18,8 +18,8 @@ COL_COUNT = 'count'
 def create_covid_deaths_table(table_id=TABLE_ID):
     # Table schema
     schema = [
-        bq.SchemaField(COL_DATES, 'STRING', mode='REQUIRED'),
-        bq.SchemaField(COL_COUNT, 'INTEGER', mode='REQUIRED')
+        bq.SchemaField(COL_DATE, 'STRING', mode='REQUIRED', description='End of one week period'),
+        bq.SchemaField(COL_COUNT, 'INTEGER', mode='REQUIRED', description='COVID-19 deaths count')
     ]
 
     # Create table
