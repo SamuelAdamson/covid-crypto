@@ -33,7 +33,7 @@ def clean_covid_cases(input=IN_COVID_CASES, output=OUT_COVID_CASES):
     cc_df.insert(0, 'date_range', cc_df.index)
     
     # Format/Filter Date Range column (Datetimes)
-    cc_df['date_range'] = cc_df['date_range'].apply(filter.format_date_range)
+    cc_df['date_range'] = cc_df['date_range'].apply(filter.db_timestamp_covid)
     # Filter Case Count column (Integer)
     cc_df['case_count'] = cc_df['case_count'].apply(filter.db_integer)
 
@@ -55,12 +55,13 @@ def clean_covid_deaths(input=IN_COVID_DEATHS, output=OUT_COVID_DEATHS):
     cd_df.insert(0, 'date_range', cd_df.index)
     
     # Format/Filter Date Range column (Datetimes)
-    cd_df['date_range'] = cd_df['date_range'].apply(filter.format_date_range)
+    cd_df['date_range'] = cd_df['date_range'].apply(filter.db_timestamp_covid)
     # Filter Case Count column (Integer)
     cd_df['death_count'] = cd_df['death_count'].apply(filter.db_integer)
 
     # Convert to json (column name: entry)
     cd_df.to_json(output, 'records')
+
 
 
 # Cleans, formats, and outputs bitcoin data
@@ -77,7 +78,7 @@ def clean_bitcoin(input=IN_BTC, output=OUT_BTC):
     btc_df = btc_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
     # Add timestamp for json string
     btc_df['date_range'] = btc_df.index.to_series()
-    btc_df['date_range'] = btc_df['date_range'].apply(filter.db_timestamp)
+    btc_df['date_range'] = btc_df['date_range'].apply(filter.db_timestamp_crypto)
 
     # Convert to json
     btc_df.to_json(output, 'records')
@@ -97,7 +98,7 @@ def clean_ethereum(input=IN_ETH, output=OUT_ETH):
     eth_df = eth_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
     # Add timestamp for json string
     eth_df['date_range'] = eth_df.index.to_series()
-    eth_df['date_range'] = eth_df['date_range'].apply(filter.db_timestamp)
+    eth_df['date_range'] = eth_df['date_range'].apply(filter.db_timestamp_crypto)
 
     # Convert to json
     eth_df.to_json(output, 'records')
@@ -106,7 +107,7 @@ def clean_ethereum(input=IN_ETH, output=OUT_ETH):
 if __name__ == '__main__':
 
     # Clean, format, and store data in output directory
-    # clean_covid_cases()
-    # clean_covid_deaths()
-    # clean_bitcoin()
+    clean_covid_cases()
+    clean_covid_deaths()
+    clean_bitcoin()
     clean_ethereum()
