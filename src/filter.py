@@ -17,7 +17,11 @@ def db_integer(value, nullable=False):
 def db_datetime(value, nullable = False):
     return datetime.strptime(value, '%Y%m%d') if not nullable or value != None else None
 
-
+# Ensure Timestamp (RETURN AS STRING)
+# PARAMS: Value, Nullable Status
+# RETURN: Filtered Value (Datetime)
+def db_timestamp(value, nullable = False):
+    return datetime.strftime(value, '%Y-%m-%d') if not nullable or value != None else None
 
 
 # FORMATS --
@@ -32,4 +36,3 @@ def format_date_range(date_range):
 
     # Return concatenation
     return ('%s_%s' % (date_str1, date_str2))
-

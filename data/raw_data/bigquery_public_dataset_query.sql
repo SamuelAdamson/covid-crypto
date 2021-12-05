@@ -228,15 +228,15 @@ FROM
     Result: Transactions per block w/ timestamp
 */
 SELECT
-  number as Block_Number,
-  transaction_count as Transactions,
+  1 as blocks,
+  transaction_count as transactions,
   timestamp
 FROM
   `bigquery-public-data.crypto_ethereum.blocks`
 WHERE
-  timestamp > '2021-01-22'
-
-
+  timestamp > '2020-01-27'
+AND 
+  timestamp < '2021-11-29'
 
 /* 
     Dataset: crypto_bitcoin
@@ -244,10 +244,12 @@ WHERE
     Result: Transactions per block w/ timestamp
 */
 SELECT
-  number as Block_Number,
-  transaction_count as Transactions,
+  1 as blocks,
+  transaction_count as transactions,
   timestamp
 FROM
   `bigquery-public-data.crypto_bitcoin.blocks`
 WHERE
-  timestamp > '2021-01-22'
+  timestamp > '2020-01-27'
+AND 
+  timestamp < '2021-11-29'

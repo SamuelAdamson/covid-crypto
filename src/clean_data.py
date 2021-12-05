@@ -15,8 +15,8 @@ IN_ETH = '../data/raw_data/ethereum.csv'
 # Output file names
 OUT_COVID_CASES = '../data/cleaned_data/covid_cases.json'
 OUT_COVID_DEATHS = '../data/cleaned_data/covid_deaths.json'
-OUT_BTC = '../data/cleaned_data/bitcoin.csv'
-OUT_ETH = '../data/cleaned_data/ethereum.csv'
+OUT_BTC = '../data/cleaned_data/bitcoin.json'
+OUT_ETH = '../data/cleaned_data/ethereum.json'
 
 
 # Cleans, formats, and outputs covid cases data
@@ -69,10 +69,44 @@ def clean_covid_deaths(input=IN_COVID_DEATHS, output=OUT_COVID_DEATHS):
 def clean_bitcoin(input=IN_BTC, output=OUT_BTC):
     # Read in CSV file to dataframe
     btc_df = pd.read_csv(input)
+    # Convert timestamp column to datetime and make index
+    btc_df['timestamp'] = pd.to_datetime(btc_df['timestamp'])
+    btc_df.set_index('timestamp')
+
+    # Group by date range, 1 week
+    btc_df = btc_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
+    # Add timestamp for json string
+    btc_df['date_range'] = btc_df.index.to_series()
+    btc_df['date_range'] = btc_df['date_range'].apply(filter.db_timestamp)
+
+    # Convert to json
+    btc_df.to_json(output, 'records')
+
+
+# Cleans, formats, and outputs ethereum data
+# PARAMS: Input File Path (CSV), Output File Path (JSON)
+# RETURN: None
+def clean_ethereum(input=IN_ETH, output=OUT_ETH):
+    # Read in CSV file to dataframe
+    eth_df = pd.read_csv(input)
+    # Convert timestamp column to datetime and make index
+    eth_df['timestamp'] = pd.to_datetime(eth_df['timestamp'])
+    eth_df.set_index('timestamp')
+
+    # Group by date range, 1 week
+    eth_df = eth_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
+    # Add timestamp for json string
+    eth_df['date_range'] = eth_df.index.to_series()
+    eth_df['date_range'] = eth_df['date_range'].apply(filter.db_timestamp)
+
+    # Convert to json
+    eth_df.to_json(output, 'records')
 
 
 if __name__ == '__main__':
 
     # Clean, format, and store data in output directory
-    clean_covid_cases()
-    clean_covid_deaths()
+    # clean_covid_cases()
+    # clean_covid_deaths()
+    # clean_bitcoin()
+    clean_ethereum()

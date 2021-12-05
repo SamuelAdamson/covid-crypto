@@ -34,7 +34,7 @@ def delete_table(table_id):
 # Insert Into Bigquery Table
 # PARAMS: Table ID, Data File (JSON)
 # RETURN: None
-def delete_table(table_id, data_file):
+def insert(table_id, data_file):
     
     # Print table deletion confirmation
     print('Nothing')
