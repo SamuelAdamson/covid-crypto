@@ -3,6 +3,7 @@
 
 from authenticateGCloud import authenticate
 from google.cloud import bigquery as bq
+import json
 
 # Store authentication client
 client = authenticate()
@@ -35,6 +36,17 @@ def delete_table(table_id):
 # PARAMS: Table ID, Data File (JSON)
 # RETURN: None
 def insert(table_id, data_file):
-    
-    # Print table deletion confirmation
-    print('Nothing')
+    # Open file with json
+    data_file = open(data_file)
+    data = json.load(data_file)
+
+    # store errors from insert job
+    errors = client.insert_rows_json(table_id, data)
+
+    # Check errors
+    if errors == []:
+        # Successfully added
+        print('Rows have been inserted')
+    else:
+        # Errors on insertion
+        print(f'ERROR INSERTING!: { errors }')

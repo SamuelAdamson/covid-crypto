@@ -9,7 +9,7 @@ import operations as op
 TABLE_ID = 'csci-260.covid_crypto.covid_cases'
 # Columns
 COL_DATE = 'date_range'
-COL_COUNT = 'count'
+COL_COUNT = 'case_count'
 
 
 # Create Covid Cases Table
@@ -32,3 +32,11 @@ def create_covid_cases_table(table_id=TABLE_ID):
 def delete_covid_cases_table(table_id=TABLE_ID):
     # Delete table
     op.delete_table(table_id)
+
+
+# Insert into Covid Cases Table
+# PARAMS: Table ID, Path to data file
+# RETURN: None
+def insert_covid_cases_data(data_file, table_id=TABLE_ID):
+    # Insert into table
+    op.insert(table_id, data_file)
