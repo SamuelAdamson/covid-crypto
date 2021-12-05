@@ -18,7 +18,7 @@ COL_COUNT = 'case_count'
 def create_covid_cases_table(table_id=TABLE_ID):
     # Table schema
     schema = [
-        bq.SchemaField(COL_DATE, 'STRING', mode='REQUIRED', description='Day of count'),
+        bq.SchemaField(COL_DATE, 'TIMESTAMP', mode='REQUIRED', description='Day of measurement'),
         bq.SchemaField(COL_COUNT, 'INTEGER', mode='REQUIRED', description='COVID-19 cases count')
     ]
 

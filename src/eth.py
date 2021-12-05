@@ -8,7 +8,7 @@ import operations as op
 # Store table ID
 TABLE_ID = 'csci-260.covid_crypto.ethereum'
 # Columns
-COL_DATE = 'date_range'
+COL_DATE = 'date'
 COL_TRANS = 'transactions'
 COL_BLOCKS = 'blocks'
 
@@ -19,7 +19,7 @@ COL_BLOCKS = 'blocks'
 def create_ethereum_table(table_id=TABLE_ID):
     # Table schema
     schema = [
-        bq.SchemaField(COL_DATE, 'TIMESTAMP', mode='REQUIRED', description='End of one week period'),
+        bq.SchemaField(COL_DATE, 'TIMESTAMP', mode='REQUIRED', description='Day of measurement'),
         bq.SchemaField(COL_TRANS, 'INTEGER', mode='REQUIRED', description='Number of transactions'),
         bq.SchemaField(COL_BLOCKS, 'INTEGER', mode='REQUIRED', description='Number of blocks')
     ]

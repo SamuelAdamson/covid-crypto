@@ -30,10 +30,10 @@ def clean_covid_cases(input=IN_COVID_CASES, output=OUT_COVID_CASES):
     cc_df.columns = ['case_count']
 
     # Make index column (date ranges) a standard column
-    cc_df.insert(0, 'date_range', cc_df.index)
+    cc_df.insert(0, 'date', cc_df.index)
     
     # Format/Filter Date Range column (Datetimes)
-    cc_df['date_range'] = cc_df['date_range'].apply(filter.db_timestamp_covid)
+    cc_df['date'] = cc_df['date'].apply(filter.db_timestamp_covid)
     # Filter Case Count column (Integer)
     cc_df['case_count'] = cc_df['case_count'].apply(filter.db_integer)
 
@@ -52,10 +52,10 @@ def clean_covid_deaths(input=IN_COVID_DEATHS, output=OUT_COVID_DEATHS):
     cd_df.columns = ['death_count']
 
     # Make index column (date ranges) a standard column
-    cd_df.insert(0, 'date_range', cd_df.index)
+    cd_df.insert(0, 'date', cd_df.index)
     
     # Format/Filter Date Range column (Datetimes)
-    cd_df['date_range'] = cd_df['date_range'].apply(filter.db_timestamp_covid)
+    cd_df['date'] = cd_df['date'].apply(filter.db_timestamp_covid)
     # Filter Case Count column (Integer)
     cd_df['death_count'] = cd_df['death_count'].apply(filter.db_integer)
 
@@ -75,10 +75,10 @@ def clean_bitcoin(input=IN_BTC, output=OUT_BTC):
     btc_df.set_index('timestamp')
 
     # Group by date range, 1 week
-    btc_df = btc_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
+    btc_df = btc_df.groupby(pd.Grouper(key='timestamp', freq='1D')).sum()
     # Add timestamp for json string
-    btc_df['date_range'] = btc_df.index.to_series()
-    btc_df['date_range'] = btc_df['date_range'].apply(filter.db_timestamp_crypto)
+    btc_df['date'] = btc_df.index.to_series()
+    btc_df['date'] = btc_df['date'].apply(filter.db_timestamp_crypto)
 
     # Convert to json
     btc_df.to_json(output, 'records')
@@ -95,10 +95,10 @@ def clean_ethereum(input=IN_ETH, output=OUT_ETH):
     eth_df.set_index('timestamp')
 
     # Group by date range, 1 week
-    eth_df = eth_df.groupby(pd.Grouper(key='timestamp', freq='1W')).sum()
+    eth_df = eth_df.groupby(pd.Grouper(key='timestamp', freq='1D')).sum()
     # Add timestamp for json string
-    eth_df['date_range'] = eth_df.index.to_series()
-    eth_df['date_range'] = eth_df['date_range'].apply(filter.db_timestamp_crypto)
+    eth_df['date'] = eth_df.index.to_series()
+    eth_df['date'] = eth_df['date'].apply(filter.db_timestamp_crypto)
 
     # Convert to json
     eth_df.to_json(output, 'records')
