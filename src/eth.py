@@ -19,7 +19,7 @@ COL_BLOCKS = 'blocks'
 def create_ethereum_table(table_id=TABLE_ID):
     # Table schema
     schema = [
-        bq.SchemaField(COL_DATE, 'TIMESTAMP', mode='REQUIRED', description='Day of measurement'),
+        bq.SchemaField(COL_DATE, 'DATE', mode='REQUIRED', description='Day of measurement'),
         bq.SchemaField(COL_TRANS, 'INTEGER', mode='REQUIRED', description='Number of transactions'),
         bq.SchemaField(COL_BLOCKS, 'INTEGER', mode='REQUIRED', description='Number of blocks')
     ]
