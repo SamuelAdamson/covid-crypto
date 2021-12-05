@@ -15,7 +15,7 @@ def db_integer(value, nullable=False):
 # PARAMS: Value, Nullable Status
 # RETURN: Filtered Value
 def db_timestamp_covid(value, nullable = False):
-    return datetime.strftime(datetime.strptime(value[1:], '%Y%m%d'), '%Y-%m-%d') if not nullable or value != None else None
+    return datetime.strftime(datetime.strptime(value[1:], '%m_%d_%y'), '%Y-%m-%d') if not nullable or value != None else None
 
 # Ensure Timestamp (RETURN AS STRING) -- specific to crypto input data
 # PARAMS: Value, Nullable Status
