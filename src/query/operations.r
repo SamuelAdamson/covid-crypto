@@ -8,7 +8,7 @@ library(bigrquery)   # Bigquery connection
 
 query <- function(sql) {
     # Authenticate w/ bigquery token
-    bq_auth(path = '../../gcloud_keys/csci-260-d918715bbf2a.json')
+    bq_auth(path = "../../gcloud_keys/csci-260-d918715bbf2a.json")
 
     # Project, Dataset
     proj <- "csci-260"
@@ -23,6 +23,7 @@ query <- function(sql) {
 
     # Execute query
     result <- DBI::dbSendQuery(con, sql)
+    result <- dbFetch(result, Inf)
 
     # Return result
     return(result)
