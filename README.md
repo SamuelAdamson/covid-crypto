@@ -12,6 +12,8 @@ COVID-19 pandemic and its consequences.
 impact on the global economy?*
 
 Languages: Python, R <br>
-Tools:  Pandas, Google Bigquery <br>
+Non-Native Packages:  <br>
+    &ensp; Python - Pandas, Google Cloud Bigquery <br>
+    &ensp; R - DBI, BigRQuery
 Data Sourced From Google Bigquery Public Datasets <br>
 
