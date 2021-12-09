@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Query Ethereum Data and Visualize
 # Author: Samuel Adamson
 
@@ -29,7 +31,7 @@ select_all_eth <- function(tbl=table_id) {
 # Select ethereum data based on date
 # PARAMS: Date, Table ID
 # RETURN: All rows in ethereum table 
-select_btc_by_date <- function(date, tbl=table_id) {
+select_eth_by_date <- function(date, tbl=table_id) {
     # Store query
     sql = paste(
         "select ", col_date, ", ", col_trans, ", ", col_blocks,
@@ -39,3 +41,21 @@ select_btc_by_date <- function(date, tbl=table_id) {
     # Return result of query (tibble)
     return(query(sql))
 }
+
+# Plot Ethereum data
+# PARAMS: Data from query result
+# RETURN: None
+plot_eth <- function(data) {
+    # Call to external function
+    plot_crypto(data, "../../figs/ethereum.png", "Ethereum")
+}
+
+
+# DISPLAY SELECTIONS
+# select_all_eth()
+# select_eth_by_date("2021-09-13") 
+
+
+# PLOT ETHEREUM DATA
+data <- select_all_eth()
+plot_eth(data)

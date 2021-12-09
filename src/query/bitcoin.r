@@ -1,3 +1,5 @@
+#!/usr/bin/env Rscript
+
 # Query Bitcoin Data and Visualize
 # Author: Samuel Adamson
 
@@ -39,3 +41,21 @@ select_btc_by_date <- function(date, tbl=table_id) {
     # Return result of query (tibble)
     return(query(sql))
 }
+
+# Plot Bitcoin data
+# PARAMS: Data from query result
+# RETURN: None
+plot_btc <- function(data) {
+    # Call to external function
+    plot_crypto(data, "../../figs/bitcoin.png", "Bitcoin")
+}
+
+
+# DISPLAY SELECTIONS
+# select_all_btc()
+# select_btc_by_date("2021-09-13") 
+
+
+# PLOT BITCOIN DATA
+data <- select_all_btc()
+plot_btc(data)
