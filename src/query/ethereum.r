@@ -6,21 +6,21 @@
 # Import operations script
 source("operations.r")
 # Store Table ID
-table_id <- "ethereum"
+table_eth_id <- "ethereum"
 
 # Columns in table for selection
 col_date <- "date"
-col_trans <- "transactions"
-col_blocks <- "blocks"
+col_trans_eth <- "transactions"
+col_blocks_eth <- "blocks"
 
 
 # Select ethereum data based on date
 # PARAMS: Table ID
 # RETURN: All rows in ethereum table 
-select_all_eth <- function(tbl=table_id) {
+select_all_eth <- function(tbl=table_eth_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_trans, ", ", col_blocks,
+    sql <- paste(
+        "select ", col_date, ", ", col_trans_eth, ", ", col_blocks_eth,
         " from ", tbl,
     sep="")
 
@@ -31,10 +31,10 @@ select_all_eth <- function(tbl=table_id) {
 # Select ethereum data based on date
 # PARAMS: Date, Table ID
 # RETURN: All rows in ethereum table 
-select_eth_by_date <- function(date, tbl=table_id) {
+select_eth_by_date <- function(date, tbl=table_eth_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_trans, ", ", col_blocks,
+    sql <- paste(
+        "select ", col_date, ", ", col_trans_eth, ", ", col_blocks_eth,
         " from ", tbl, " where ", col_date, " = '", date, "'",  
     sep="")
 
@@ -57,5 +57,5 @@ plot_eth <- function(data) {
 
 
 # PLOT ETHEREUM DATA
-data <- select_all_eth()
-plot_eth(data)
+# data <- select_all_eth()
+# plot_eth(data)

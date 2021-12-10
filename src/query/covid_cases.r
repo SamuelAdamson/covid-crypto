@@ -6,7 +6,7 @@
 # Import operations script
 source("operations.r")
 # Store Table ID
-table_id <- "covid_cases"
+table_cc_id <- "covid_cases"
 
 # Columns in table for selection
 col_date <- "date"
@@ -16,10 +16,10 @@ col_cases <- "case_count"
 # Select COVID-19 cases data based on date
 # PARAMS: Table ID
 # RETURN: All rows in COVID-19 cases table 
-select_all_covid_cases <- function(tbl=table_id) {
+select_all_covid_cases <- function(tbl=table_cc_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_cases, ", ",
+    sql <- paste(
+        "select ", col_date, ", ", col_cases,
         " from ", tbl,
     sep="")
 
@@ -30,10 +30,10 @@ select_all_covid_cases <- function(tbl=table_id) {
 # Select COVID-19 cases data based on date
 # PARAMS: Date, Table ID
 # RETURN: All rows in COVID-19 cases table 
-select_covid_cases_by_date <- function(date, tbl=table_id) {
+select_covid_cases_by_date <- function(date, tbl=table_cc_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_trans, ", ", col_blocks,
+    sql <- paste(
+        "select ", col_date, ", ", col_cases,
         " from ", tbl, " where ", col_date, " = '", date, "'",  
     sep="")
 
@@ -46,7 +46,7 @@ select_covid_cases_by_date <- function(date, tbl=table_id) {
 # RETURN: None
 plot_cc <- function(data) {
     # Call to external function
-    plot_covid(data, "../../figs/covid_cases.png", "COVID-19 Cases", "case_count", "Case Count")
+    plot_covid(data, "../../figs/covid_cases.png", "COVID-19 Cases Cumulative", "case_count", "Case Count")
 }
 
 
@@ -55,5 +55,5 @@ plot_cc <- function(data) {
 # select_covid_cases_by_date("2021-09-13")
 
 # PLOT COVID-19 CASES DATA
-data <- select_all_covid_cases()
-plot_cc(data)
+# data <- select_all_covid_cases()
+# plot_cc(data)

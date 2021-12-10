@@ -6,21 +6,21 @@
 # Import operations script
 source("operations.r")
 # Store Table ID
-table_id <- "bitcoin"
+table_btc_id <- "bitcoin"
 
 # Columns in table for selection
 col_date <- "date"
-col_trans <- "transactions"
-col_blocks <- "blocks"
+col_trans_btc <- "transactions"
+col_blocks_btc <- "blocks"
 
 
 # Select bitcoin data based on date
 # PARAMS: Table ID
 # RETURN: All rows in bitcoin table 
-select_all_btc <- function(tbl=table_id) {
+select_all_btc <- function(tbl=table_btc_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_trans, ", ", col_blocks,
+    sql <- paste(
+        "select ", col_date, ", ", col_trans_btc, ", ", col_blocks_btc,
         " from ", tbl,
     sep="")
 
@@ -31,10 +31,10 @@ select_all_btc <- function(tbl=table_id) {
 # Select bitcoin data based on date
 # PARAMS: Date, Table ID
 # RETURN: All rows in bitcoin table 
-select_btc_by_date <- function(date, tbl=table_id) {
+select_btc_by_date <- function(date, tbl=table_btc_id) {
     # Store query
-    sql = paste(
-        "select ", col_date, ", ", col_trans, ", ", col_blocks,
+    sql <- paste(
+        "select ", col_date, ", ", col_trans_btc, ", ", col_blocks_btc,
         " from ", tbl, " where ", col_date, " = '", date, "'",  
     sep="")
 
@@ -57,5 +57,5 @@ plot_btc <- function(data) {
 
 
 # PLOT BITCOIN DATA
-data <- select_all_btc()
-plot_btc(data)
+# data <- select_all_btc()
+# plot_btc(data)
