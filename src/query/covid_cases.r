@@ -25,6 +25,7 @@ select_all_covid_cases <- function(tbl=table_cc_id) {
 
     # Return result of query (tibble)
     return(query(sql))
+    #print(query(sql))
 }
 
 # Select COVID-19 cases data based on date
@@ -51,7 +52,7 @@ plot_cc <- function(data) {
 
 
 # DISPLAY SELECTIONS
-# select_all_covid_cases()
+select_all_covid_cases()
 # select_covid_cases_by_date("2021-09-13")
 
 # PLOT COVID-19 CASES DATA
